@@ -144,6 +144,9 @@ public class SolutionTest {
         assertEquals(false, savingsAccount.withdraw(500.0));
     }
     
+
+    
+    
     @Test
     public void testWithdrawFromCDAccount(){
     	AccountHolder accountHolder = new AccountHolder(
@@ -153,7 +156,6 @@ public class SolutionTest {
             	"123456789");
     	
     	CDAccount cdAccount = accountHolder.addCDAccount(new CDOffering(5, 0.03), 10000);
-        
         assertEquals(false, cdAccount.withdraw(500.0));
     }
     
@@ -169,7 +171,7 @@ public class SolutionTest {
         
         assertEquals(false, cdAccount.deposit(500.0));
     }
-
+    
     @Test
     public void testFutureValueInSavingsAccount(){
         AccountHolder accountHolder = new AccountHolder(
@@ -215,10 +217,10 @@ public class SolutionTest {
         assertEquals(fv, cdAccount.futureValue(), 0);
     }
     
+  
     @Test
     public void testSuccessfulReadCDOfferingFromString(){
         CDOffering cdOffering = CDOffering.readFromString("3,0.019");
-        
         assertEquals(3, cdOffering.getTerm());
         assertEquals(0.019, cdOffering.getInterestRate(), 0);
     }
@@ -347,4 +349,7 @@ public class SolutionTest {
     	assertEquals(11, MeritBank.getNextAccountNumber());
     	assertEquals(3, MeritBank.getCDOfferings().length);
     }
+    
+    
 }
+    
