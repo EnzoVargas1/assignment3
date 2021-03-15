@@ -1,53 +1,41 @@
 package com.meritamerica.assignment3;
 
 public class CDOffering {
-	
-	private static int term;
-	private static double interestRate;
-	
 	public CDOffering(int term, double interestRate) {
 		this.term = term;
 		this.interestRate = interestRate;
 	}
-	
-	public double getInterestRate() {
-		return interestRate;
-	}
-	
+
 	public int getTerm() {
-		return term;
+		return this.term;
 	}
 
-	
-	public void setInterestRate(double interestRate) {
-		this.interestRate = interestRate;
+	public double getInterestRate() {
+		return this.interestRate;
 	}
-	
-	public void setTerm(int term) {
-		this.term = term;
-	}
-	
-	public static CDOffering readFromString(String str) {
-		String holder = "";
-		boolean hasComma = false;
-		for(int i = 0; i < str.length(); i++) {
-			char ch = str.charAt(i);
-			
-			if(ch == ',') {
-				term = Integer.parseInt(holder);
-				holder = "";
-				hasComma = true;
-			}
-			else {
-				
-				holder = holder + ch;
-				
-			}
-			
+
+	public static CDOffering readFromString(String cdOfferingDataString) throws java.lang.NumberFormatException{
+		//expecting like this: 1,0.018
+		CDOffering cd = null;
+
+		if(cdOfferingDataString.indexOf(',')!=-1) {
+			int term = Integer.parseInt(cdOfferingDataString.substring(0, cdOfferingDataString.indexOf(',')));  
+			double rate = Double.parseDouble(cdOfferingDataString.substring(cdOfferingDataString.indexOf(',')+1));
+			cd = new CDOffering(term,rate);
+		} 
+		else {
+			throw new NumberFormatException();
 		}
-		
-		interestRate = Double.parseDouble(holder);
-		if(hasComma == true) return new CDOffering(term, interestRate);
-		else return null;
+
+		return cd;
 	}
+
+	public String writeToString() {
+		String cdString = this.getTerm() + "," + this.getInterestRate();
+		return cdString;
+	}
+
+	private int term;
+	private double interestRate;
+
 }
